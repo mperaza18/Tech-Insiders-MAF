@@ -14,20 +14,20 @@ The project is structured as three progressive demos, each building on the previ
   │                                                                     │
   │  Input: resume text + target role                                   │
   │                                                                     │
-  │   ┌──────────────┐    ┌───────────────────┐    ┌────────────────┐  │
-  │   │  ResumeAgent │───▶│ SeniorityAgent    │───▶│ PlannerAgent  │  │
-  │   │  (ingest)    │    │ (classify)        │    │ (plan rounds) │  │
-  │   └──────────────┘    └───────────────────┘    └───────┬────────┘  │
+  │   ┌──────────────┐    ┌───────────────────┐    ┌────────────────┐   │
+  │   │  ResumeAgent │───▶│ SeniorityAgent    │───▶│ PlannerAgent   │   │
+  │   │  (ingest)    │    │ (classify)        │    │ (plan rounds)  │   │
+  │   └──────────────┘    └───────────────────┘    └───────┬────────┘   │
   │                                                         │           │
-  │                                               ┌─────────▼────────┐ │
-  │                                               │  Human Review    │ │
-  │                                               │  (HITL gate)     │ │
-  │                                               └─────────┬────────┘ │
+  │                                               ┌─────────▼────────┐  │
+  │                                               │  Human Review    │  │
+  │                                               │  (HITL gate)     │  │
+  │                                               └─────────┬────────┘  │
   │                                                         │           │
-  │                                               ┌─────────▼────────┐ │
-  │                                               │ EvaluatorAgent   │ │
-  │                                               │ (score + hire?)  │ │
-  │                                               └──────────────────┘ │
+  │                                               ┌─────────▼────────┐  │
+  │                                               │ EvaluatorAgent   │  │
+  │                                               │ (score + hire?)  │  │
+  │                                               └──────────────────┘  │
   │                                                                     │
   │  Output: EvaluationResult (score, recommendation, risks, follow-ups)│
   └─────────────────────────────────────────────────────────────────────┘
@@ -170,9 +170,9 @@ Demo 2 expands the single agent into a **four-step, multi-agent pipeline**. Agen
   ─────────────────────────────────────────────────────
   Execution strategies (steps 1–3):
   ┌──────────────────────┐   ┌─────────────────────────┐
-  │  SimplePipelineRunner│   │  InterviewWorkflowRunner │
-  │  (sequential calls)  │   │  (MAF WorkflowBuilder    │
-  │                      │   │   directed graph)         │
+  │  SimplePipelineRunner│   │  InterviewWorkflowRunner│
+  │  (sequential calls)  │   │  (MAF WorkflowBuilder   │
+  │                      │   │   directed graph)       │
   └──────────────────────┘   └─────────────────────────┘
 ```
 
@@ -217,12 +217,12 @@ Demo 3 replaces the hand-coded step sequencer with a **single LLM-driven `Orches
   │                  OrchestratorAgent                  │
   │            (LLM-driven, tool-calling loop)          │
   │                                                     │
-  │   tool calls dispatched autonomously by the LLM:   │
+  │   tool calls dispatched autonomously by the LLM:    │
   │                                                     │
   │   ingest_resume ──────▶ ResumeIngestion Agent       │
-  │   classify_seniority ─▶ SeniorityClassifier Agent  │
+  │   classify_seniority ─▶ SeniorityClassifier Agent   │
   │   plan_interview ─────▶ InterviewPlanner Agent      │
-  │   human_review ───────▶ C# delegate (console HITL) │
+  │   human_review ───────▶ C# delegate (console HITL)  │
   │        └── if REJECTED: loop back ◀────────────────┘│
   │   evaluate_candidate ─▶ Evaluator Agent             │
   └─────────────────────────────────────────────────────┘
