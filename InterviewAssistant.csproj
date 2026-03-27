@@ -16,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Agents\" />
-    <Folder Include="assets\resumes\" />
-    <Folder Include="Models\" />
     <Folder Include="Pipelines\" />
     <Folder Include="Workflows\" />
   </ItemGroup>
